@@ -18,6 +18,16 @@ Matrix2d::Matrix2d(std::initializer_list<std::initializer_list<double>> lst)
   }
 }
 
+Matrix2d::Matrix2d(const Matrix2d& matrix)
+    :   rows(matrix.numbersArray.size())
+    ,   cols(matrix.numbersArray[0].size())
+{
+    for (const auto& row : matrix.numbersArray)
+    {
+        this->numbersArray.push_back(row);
+    }
+}
+
 bool Matrix2d::operator==(const Matrix2d& matrix) const
 {
   if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
@@ -52,6 +62,32 @@ bool Matrix2d::operator!=(const Matrix2d& matrix) const
   }
 
   return false;
+}
+
+Matrix2d Matrix2d::operator*(double number) const
+{
+    Matrix2d mat(*this);
+
+    for (std::size_t row = 0; row < mat.rows; row++)
+    {
+        for (std::size_t col = 0; col < mat.cols; col++)
+        {
+            mat.numbersArray[row][col] *= number;
+        }
+    }
+
+    return mat;
+}
+
+void Matrix2d::operator*=(double number)
+{
+    for (std::size_t row = 0; row < this->rows; row++)
+    {
+        for (std::size_t col = 0; col < this->cols; col++)
+        {
+            this->numbersArray[row][col] *= number;
+        }
+    }
 }
 
 double Matrix2d::getValue(std::size_t row, std::size_t col) const

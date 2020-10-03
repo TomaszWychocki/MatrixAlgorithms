@@ -9,7 +9,7 @@
 - [x] Equality
 - [ ] Addition
 - [ ] Subtraction
-- [ ] Scalar multiplication
+- [x] Scalar multiplication
 - [ ] Matrix multiplication
 - [ ] Generating identity matrix
 - [ ] Generating matrix of zeros
