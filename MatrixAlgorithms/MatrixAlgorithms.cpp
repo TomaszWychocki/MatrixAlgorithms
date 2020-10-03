@@ -41,9 +41,20 @@ void TEST_003_getRows()
   assert(mat3.getRows() == 3);
 }
 
+void TEST_004_equality()
+{
+  Matrix2d mat = { {2, 3, 4} , {5, 6, 7} };
+  Matrix2d mat2 = { {2, 3, 4} , {5, 6, 7} };
+  Matrix2d mat3 = { {7}, {9}, {2} };
+  
+  assert(mat == mat2);
+  assert(mat != mat3);
+}
+
 int main()
 {
   TEST_001_toVector();
   TEST_002_getCols();
   TEST_003_getRows();
+  TEST_004_equality();
 }

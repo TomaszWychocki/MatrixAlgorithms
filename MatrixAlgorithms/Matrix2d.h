@@ -15,14 +15,16 @@ public:
    * OPERATOR
    */
   friend std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix);
+  bool operator==(const Matrix2d& matrix) const;
+  bool operator!=(const Matrix2d& matrix) const;
 
   /*
    * METHODS
    */
-  double getValue(std::size_t row, std::size_t col);
-  std::size_t getRows();
-  std::size_t getCols();
-  std::vector<double> toVector();
+  double getValue(std::size_t row, std::size_t col) const;
+  std::size_t getRows() const;
+  std::size_t getCols() const;
+  std::vector<double> toVector() const;
 
 private:
   /*

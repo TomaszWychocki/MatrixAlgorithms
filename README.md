@@ -6,7 +6,7 @@
 [![GitHub pull-requests closed](https://img.shields.io/github/issues-pr-closed/TomaszWychocki/MatrixAlgorithms.svg)](https://GitHub.com/TomaszWychocki/MatrixAlgorithms/pull/)
 
 ## Implemented operations with matrices:
-- [ ] Equality
+- [x] Equality
 - [ ] Addition
 - [ ] Subtraction
 - [ ] Scalar multiplication

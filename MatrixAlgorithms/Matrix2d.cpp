@@ -18,22 +18,58 @@ Matrix2d::Matrix2d(std::initializer_list<std::initializer_list<double>> lst)
   }
 }
 
-double Matrix2d::getValue(std::size_t row, std::size_t col)
+bool Matrix2d::operator==(const Matrix2d& matrix) const
+{
+  if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
+  {
+    return false;
+  }
+
+  for (std::size_t row = 0; row < this->rows; row++)
+  {
+    if (matrix.numbersArray[row] != this->numbersArray[row])
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+bool Matrix2d::operator!=(const Matrix2d& matrix) const
+{
+  if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
+  {
+    return true;
+  }
+
+  for (std::size_t row = 0; row < this->rows; row++)
+  {
+    if (matrix.numbersArray[row] != this->numbersArray[row])
+    {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+double Matrix2d::getValue(std::size_t row, std::size_t col) const
 {
   return this->numbersArray[row][col];
 }
 
-std::size_t Matrix2d::getRows()
+std::size_t Matrix2d::getRows() const
 {
   return this->rows;
 }
 
-std::size_t Matrix2d::getCols()
+std::size_t Matrix2d::getCols() const
 {
   return this->cols;
 }
 
-std::vector<double> Matrix2d::toVector()
+std::vector<double> Matrix2d::toVector() const
 {
   std::vector<double> vec;
 
