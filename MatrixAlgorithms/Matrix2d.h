@@ -10,6 +10,7 @@ public:
    */
   Matrix2d();
   Matrix2d(std::initializer_list<std::initializer_list<double>> lst);
+  Matrix2d(const Matrix2d& matrix);
 
   /*
    * OPERATOR
@@ -17,6 +18,8 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix);
   bool operator==(const Matrix2d& matrix) const;
   bool operator!=(const Matrix2d& matrix) const;
+  Matrix2d operator*(double number) const;
+  void operator*=(double number);
 
   /*
    * METHODS
