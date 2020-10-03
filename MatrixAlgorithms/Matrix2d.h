@@ -9,7 +9,7 @@ public:
    * CONSTRUCTOR
    */
   Matrix2d();
-  Matrix2d(std::size_t rows, std::size_t cols, std::initializer_list<std::initializer_list<double>> lst);
+  Matrix2d(std::initializer_list<std::initializer_list<double>> lst);
 
   /*
    * OPERATOR
@@ -20,8 +20,19 @@ public:
    * METHODS
    */
   double getValue(std::size_t row, std::size_t col);
+  std::size_t getRows();
+  std::size_t getCols();
   std::vector<double> toVector();
 
 private:
+  /*
+   * FIELDS
+   */
+  const std::size_t rows;
+  const std::size_t cols;
+
+  /*
+   * METHODS
+   */
   std::vector<std::vector<double>> numbersArray;
 };

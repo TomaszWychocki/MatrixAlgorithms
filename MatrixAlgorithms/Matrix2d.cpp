@@ -2,13 +2,15 @@
 #include <vector>
 
 Matrix2d::Matrix2d()
+  : rows(0)
+  , cols(0)
 {
 }
 
-Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, std::initializer_list<std::initializer_list<double>> lst)
+Matrix2d::Matrix2d(std::initializer_list<std::initializer_list<double>> lst)
+  : rows(lst.size())
+  , cols(static_cast<std::initializer_list<double>>(*lst.begin()).size())
 {
-  std::size_t row = 0;
-
   for (const auto& l : lst)
   {
     std::vector<double> vec{ l };
@@ -19,6 +21,16 @@ Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, std::initializer_list<std
 double Matrix2d::getValue(std::size_t row, std::size_t col)
 {
   return this->numbersArray[row][col];
+}
+
+std::size_t Matrix2d::getRows()
+{
+  return this->rows;
+}
+
+std::size_t Matrix2d::getCols()
+{
+  return this->cols;
 }
 
 std::vector<double> Matrix2d::toVector()
