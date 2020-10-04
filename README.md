@@ -1,4 +1,5 @@
 # Matrix Algorithms
+[![Build Status](https://api.travis-ci.com/TomaszWychocki/MatrixAlgorithms.svg?branch=main)](https://travis-ci.org/TomaszWychocki/MatrixAlgorithms)
 [![GitHub license](https://img.shields.io/github/license/TomaszWychocki/MatrixAlgorithms.svg)](https://github.com/TomaszWychocki/MatrixAlgorithms/blob/master/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/TomaszWychocki/MatrixAlgorithms.svg)](https://GitHub.com/TomaszWychocki/MatrixAlgorithms/graphs/contributors/)
 [![GitHub issues](https://img.shields.io/github/issues/TomaszWychocki/MatrixAlgorithms.svg)](https://GitHub.com/TomaszWychocki/MatrixAlgorithms/issues/)
@@ -11,11 +12,10 @@
 - [ ] Subtraction
 - [x] Scalar multiplication
 - [ ] Matrix multiplication
-- [ ] Generating identity matrix
-- [ ] Generating matrix of zeros
-- [ ] Generating matrix of ones
+- [x] Generating identity matrix
+- [x] Generating matrix of zeros
+- [x] Generating matrix of ones
 - [ ] Matrix inverstion
 - [ ] Transpose of a matrix
 - [ ] Determinant of a matrix
-- [ ] Inverse of a matrix
 - [ ] Concatenating of matrices
