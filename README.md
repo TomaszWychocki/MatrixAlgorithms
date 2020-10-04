@@ -1,4 +1,5 @@
 # Matrix Algorithms
+[![Build Status](https://api.travis-ci.com/TomaszWychocki/MatrixAlgorithms.svg?branch=main)](https://travis-ci.org/TomaszWychocki/MatrixAlgorithms)
 [![GitHub license](https://img.shields.io/github/license/TomaszWychocki/MatrixAlgorithms.svg)](https://github.com/TomaszWychocki/MatrixAlgorithms/blob/master/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/TomaszWychocki/MatrixAlgorithms.svg)](https://GitHub.com/TomaszWychocki/MatrixAlgorithms/graphs/contributors/)
 [![GitHub issues](https://img.shields.io/github/issues/TomaszWychocki/MatrixAlgorithms.svg)](https://GitHub.com/TomaszWychocki/MatrixAlgorithms/issues/)
