@@ -82,7 +82,65 @@ void TEST_005_scalarMultiplication()
     mat4 *= 2;
 
     assert(expectedResult4 == mat4);
+}
 
+void TEST_006_matrix_ones()
+{
+    Matrix2d mat(4, 5, FillType::ONES);
+    Matrix2d expectedResult = { {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1}, {1, 1, 1, 1, 1} };
+    assert(mat == expectedResult);
+
+    Matrix2d mat2(2, 2, FillType::ONES);
+    Matrix2d expectedResult2 = { {1, 1}, {1, 1} };
+    assert(mat2 == expectedResult2);
+
+    Matrix2d mat3(1, 1, FillType::ONES);
+    Matrix2d expectedResult3 = { {1} };
+    assert(mat3 == expectedResult3);
+}
+
+void TEST_007_matrix_zeros()
+{
+    Matrix2d mat(4, 5, FillType::ZEROS);
+    Matrix2d expectedResult = { {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0} };
+    assert(mat == expectedResult);
+
+    Matrix2d mat2(2, 2, FillType::ZEROS);
+    Matrix2d expectedResult2 = { {0, 0}, {0, 0} };
+    assert(mat2 == expectedResult2);
+
+    Matrix2d mat3(1, 1, FillType::ZEROS);
+    Matrix2d expectedResult3 = { {0} };
+    assert(mat3 == expectedResult3);
+}
+
+void TEST_008_matrix_identity()
+{
+    Matrix2d mat(4, 4, FillType::IDENTITY);
+    Matrix2d expectedResult = { {1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1} };
+    assert(mat == expectedResult);
+
+    Matrix2d mat2(2, 2, FillType::IDENTITY);
+    Matrix2d expectedResult2 = { {1, 0}, {0, 1} };
+    assert(mat2 == expectedResult2);
+
+    Matrix2d mat3(1, 1, FillType::IDENTITY);
+    Matrix2d expectedResult3 = { {1} };
+    assert(mat3 == expectedResult3);
+
+    bool isException = false;
+    try
+    {
+        Matrix2d mat4(4, 2, FillType::IDENTITY);
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::MATRIX_MUST_BE_SQUARE)
+        {
+            isException = true;
+        }
+    }
+    assert(isException);
 }
 
 int main()
@@ -92,4 +150,7 @@ int main()
     TEST_003_getRows();
     TEST_004_equality();
     TEST_005_scalarMultiplication();
+    TEST_006_matrix_ones();
+    TEST_007_matrix_zeros();
+    TEST_008_matrix_identity();
 }

@@ -11,11 +11,10 @@
 - [ ] Subtraction
 - [x] Scalar multiplication
 - [ ] Matrix multiplication
-- [ ] Generating identity matrix
-- [ ] Generating matrix of zeros
-- [ ] Generating matrix of ones
+- [x] Generating identity matrix
+- [x] Generating matrix of zeros
+- [x] Generating matrix of ones
 - [ ] Matrix inverstion
 - [ ] Transpose of a matrix
 - [ ] Determinant of a matrix
-- [ ] Inverse of a matrix
 - [ ] Concatenating of matrices

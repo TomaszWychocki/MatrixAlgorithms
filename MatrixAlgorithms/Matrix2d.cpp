@@ -28,6 +28,51 @@ Matrix2d::Matrix2d(const Matrix2d& matrix)
     }
 }
 
+Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
+    : rows(rows)
+    , cols(cols)
+{
+    if (fillType == FillType::IDENTITY && cols != rows)
+    {
+        throw Errors::MATRIX_MUST_BE_SQUARE;
+    }
+
+    switch (fillType)
+    {
+    case FillType::IDENTITY:
+        for (std::size_t row = 0; row < rows; row++)
+        {
+            std::vector<double> vec(cols, 0.0);
+            this->numbersArray.push_back(vec);
+
+            for (std::size_t col = 0; col < cols; col++)
+            {
+                if (row == col)
+                {
+                    this->numbersArray[row][col] = 1.0;
+                }
+            }
+        }
+        break;
+
+    case FillType::ZEROS:
+        for (std::size_t row = 0; row < rows; row++)
+        {
+            std::vector<double> vec(cols, 0.0);
+            this->numbersArray.push_back(vec);
+        }
+        break;
+
+    case FillType::ONES:
+        for (std::size_t row = 0; row < rows; row++)
+        {
+            std::vector<double> vec(cols, 1.0);
+            this->numbersArray.push_back(vec);
+        }
+        break;
+    }
+}
+
 bool Matrix2d::operator==(const Matrix2d& matrix) const
 {
     if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
