@@ -143,6 +143,77 @@ void TEST_008_matrix_identity()
     assert(isException);
 }
 
+void TEST_009_subtraction()
+{
+    Matrix2d mat1 = { {2, 3, 4} , {5, 6, 7} };
+    Matrix2d mat2 = { {5, 2, 1} , {5, 8, 10} };
+    Matrix2d mat1_copy = { mat1 };
+    Matrix2d mat2_copy = { mat2 };
+    Matrix2d expectedResult1 = { {-3, 1, 3} , {0, -2, -3} };
+    Matrix2d expectedResult2 = { {3, -1, -3} , {0, 2, 3} };
+    Matrix2d result1 = mat1 - mat2;
+    Matrix2d result2 = mat2 - mat1;
+
+    assert(mat1 == mat1_copy);
+    assert(mat2 == mat2_copy);
+    assert(result1 == expectedResult1);
+    assert(result2 == expectedResult2);
+
+    bool isException = false;
+    try
+    {
+        Matrix2d mat3(3, 3, FillType::ONES);
+        Matrix2d mat4(4, 3, FillType::ONES);
+        Matrix2d result3 = mat3 - mat4;
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIM_MUST_BE_EQUAL)
+        {
+            isException = true;
+        }
+    }
+    assert(isException);
+}
+
+
+void TEST_010_subtraction_2()
+{
+    Matrix2d mat1 = { {2, 3, 4} , {5, 6, 7} };
+    Matrix2d mat2 = { {5, 2, 1} , {5, 8, 10} };
+    Matrix2d mat2_copy = { mat2 };
+    Matrix2d expectedResult1 = { {-3, 1, 3} , {0, -2, -3} };
+    mat1 -= mat2;
+
+    assert(mat1 == expectedResult1);
+    assert(mat2 == mat2_copy);
+
+    Matrix2d mat3 = { {2, 3, 4} , {5, 6, 7} };
+    Matrix2d mat4 = { {5, 2, 1} , {5, 8, 10} };
+    Matrix2d mat3_copy = { mat3 };
+    Matrix2d expectedResult2 = { {3, -1, -3} , {0, 2, 3} };
+    mat4 -= mat3;
+
+    assert(mat4 == expectedResult2);
+    assert(mat3 == mat3_copy);
+
+    bool isException = false;
+    try
+    {
+        Matrix2d mat5(3, 3, FillType::ONES);
+        Matrix2d mat6(4, 3, FillType::ONES);
+        mat5 -= mat6;
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIM_MUST_BE_EQUAL)
+        {
+            isException = true;
+        }
+    }
+    assert(isException);
+}
+
 int main()
 {
     TEST_001_toVector();
@@ -153,4 +224,6 @@ int main()
     TEST_006_matrix_ones();
     TEST_007_matrix_zeros();
     TEST_008_matrix_identity();
+    TEST_009_subtraction();
+    TEST_010_subtraction_2();
 }

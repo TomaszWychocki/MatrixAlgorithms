@@ -11,7 +11,8 @@ enum class FillType
 
 enum class Errors
 {
-    MATRIX_MUST_BE_SQUARE
+    MATRIX_MUST_BE_SQUARE,
+    DIM_MUST_BE_EQUAL
 };
 
 class Matrix2d
@@ -33,6 +34,8 @@ public:
     bool operator!=(const Matrix2d& matrix) const;
     Matrix2d operator*(double number) const;
     void operator*=(double number);
+    Matrix2d operator-(const Matrix2d& matrix) const;
+    void operator-=(const Matrix2d& matrix);
 
     /*
      * METHODS
