@@ -9,7 +9,7 @@
 ## Implemented operations with matrices:
 - [x] Equality
 - [ ] Addition
-- [ ] Subtraction
+- [x] Subtraction
 - [x] Scalar multiplication
 - [x] Matrix multiplication
 - [x] Generating identity matrix

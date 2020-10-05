@@ -34,11 +34,11 @@ public:
     bool operator==(const Matrix2d& matrix) const;
     bool operator!=(const Matrix2d& matrix) const;
     Matrix2d operator*(double number) const;
-    void operator*=(double number);
+    Matrix2d& operator*=(double number);
     Matrix2d operator-(const Matrix2d& matrix) const;
-    void operator-=(const Matrix2d& matrix);
-    Matrix2d operator*(const Matrix2d& mat2);
-    void operator *= (const Matrix2d& mat2);
+    Matrix2d& operator-=(const Matrix2d& matrix);
+    Matrix2d operator*(const Matrix2d& matrix);
+    void operator*=(const Matrix2d& matrix);
 
     /*
      * METHODS
@@ -59,4 +59,8 @@ private:
     /*
      * METHODS
      */
+    static bool areEqual(const Matrix2d& matrix1, const Matrix2d& matrix2);
+    static void multiply(Matrix2d& destMatrix, double number);
+    static void multiply(Matrix2d& destMatrix, const Matrix2d& matrix1, const Matrix2d& matrix2);
+    static void subtract(Matrix2d& destMatrix, const Matrix2d& matrix);
 };

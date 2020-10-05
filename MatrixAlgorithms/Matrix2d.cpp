@@ -75,160 +75,60 @@ Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
 
 bool Matrix2d::operator==(const Matrix2d& matrix) const
 {
-    if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
-    {
-        return false;
-    }
-
-    for (std::size_t row = 0; row < this->rows; row++)
-    {
-        if (matrix.numbersArray[row] != this->numbersArray[row])
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return Matrix2d::areEqual(*this, matrix);
 }
 
 bool Matrix2d::operator!=(const Matrix2d& matrix) const
 {
-    if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
-    {
-        return true;
-    }
-
-    for (std::size_t row = 0; row < this->rows; row++)
-    {
-        if (matrix.numbersArray[row] != this->numbersArray[row])
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return !Matrix2d::areEqual(*this, matrix);
 }
 
 Matrix2d Matrix2d::operator*(double number) const
 {
     Matrix2d mat(*this);
-
-    for (std::size_t row = 0; row < mat.rows; row++)
-    {
-        for (std::size_t col = 0; col < mat.cols; col++)
-        {
-            mat.numbersArray[row][col] *= number;
-        }
-    }
+    Matrix2d::multiply(mat, number);
 
     return mat;
 }
 
-void Matrix2d::operator*=(double number)
+Matrix2d& Matrix2d::operator*=(double number)
 {
-    for (std::size_t row = 0; row < this->rows; row++)
-    {
-        for (std::size_t col = 0; col < this->cols; col++)
-        {
-            this->numbersArray[row][col] *= number;
-        }
-    }
+    Matrix2d::multiply(*this, number);
+    return *this;
 }
 
 Matrix2d Matrix2d::operator-(const Matrix2d& matrix) const
 {
-    if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
-    {
-        throw Errors::DIM_MUST_BE_EQUAL;
-    }
-
     Matrix2d mat(*this);
-
-    for (std::size_t row = 0; row < mat.rows; row++)
-    {
-        for (std::size_t col = 0; col < mat.cols; col++)
-        {
-            mat.numbersArray[row][col] -= matrix.numbersArray[row][col];
-        }
-    }
+    Matrix2d::subtract(mat, matrix);
 
     return mat;
 }
 
-void Matrix2d::operator-=(const Matrix2d& matrix)
+Matrix2d& Matrix2d::operator-=(const Matrix2d& matrix)
 {
-    if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
-    {
-        throw Errors::DIM_MUST_BE_EQUAL;
-    }
-
-    for (std::size_t row = 0; row < this->rows; row++)
-    {
-        for (std::size_t col = 0; col < this->cols; col++)
-        {
-            this->numbersArray[row][col] -= matrix.numbersArray[row][col];
-        }
-    }
+    Matrix2d::subtract(*this, matrix);
+    return *this;
 }
 
-//operator overloading for matrix multiplication (*)
-Matrix2d  Matrix2d::operator * (const Matrix2d& mat2)
+Matrix2d Matrix2d::operator*(const Matrix2d& matrix)
 {
-    //check for erranious input and throw error
-    if (this->cols != mat2.rows)
-    {
-        //throw an error
-        throw Errors::DIMENSIONAL_ERROR;
-    }
-
-    Matrix2d result(this->rows, mat2.cols, FillType::ZEROS);
-
-    //now implement matrix multiplaication algorithm requires o(n^3) complexity
-    for (std::size_t i = 0; i < this->rows; i++)
-    {
-        for (std::size_t j = 0; j < mat2.cols; j++)
-        {
-            double value = 0;
-            for (std::size_t k = 0; k < this->cols; k++)
-            {
-                value += this->numbersArray[i][k] * mat2.numbersArray[k][j];
-            }
-            result.numbersArray[i][j] = value;
-        }
-    }
+    Matrix2d result(this->rows, matrix.cols, FillType::ZEROS);
+    Matrix2d::multiply(result, *this, matrix);
 
     return result;
 }
 
-//operator overloading for matrix multiplication (*=)
-void  Matrix2d::operator *= (const Matrix2d& mat2)
+void  Matrix2d::operator*=(const Matrix2d& matrix)
 {
-    //check for erranious input and throw error
-    if (this->cols != mat2.rows)
-    {
-        //throw an error
-        throw Errors::DIMENSIONAL_ERROR;
-    }
-
-    Matrix2d result(this->rows, mat2.cols, FillType::ZEROS);
-
-    //now implement matrix multiplaication algorithm requires o(n^3) complexity
-    for (std::size_t i = 0; i < this->rows; i++)
-    {
-        for (std::size_t j = 0; j < mat2.cols; j++)
-        {
-            double value = 0;
-            for (std::size_t k = 0; k < this->cols; k++)
-            {
-                value += this->numbersArray[i][k] * mat2.numbersArray[k][j];
-            }
-            result.numbersArray[i][j] = value;
-        }
-    }
+    Matrix2d result(this->rows, matrix.cols, FillType::ZEROS);
+    Matrix2d::multiply(result, *this, matrix);
 
     //modifying the first operand
     for (std::size_t i = 0; i < this->rows; i++)
+    {
         this->numbersArray[i].clear();
+    }
 
     this->numbersArray.clear();
 
@@ -262,6 +162,77 @@ std::vector<double> Matrix2d::toVector() const
     }
 
     return vec;
+}
+
+bool Matrix2d::areEqual(const Matrix2d& matrix1, const Matrix2d& matrix2)
+{
+    if (matrix1.cols != matrix2.getCols() || matrix1.rows != matrix2.getRows())
+    {
+        return false;
+    }
+
+    for (std::size_t row = 0; row < matrix1.rows; row++)
+    {
+        if (matrix1.numbersArray[row] != matrix2.numbersArray[row])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void Matrix2d::multiply(Matrix2d& destMatrix, double number)
+{
+    for (std::size_t row = 0; row < destMatrix.rows; row++)
+    {
+        for (std::size_t col = 0; col < destMatrix.cols; col++)
+        {
+            destMatrix.numbersArray[row][col] *= number;
+        }
+    }
+}
+
+void Matrix2d::multiply(Matrix2d& destMatrix, const Matrix2d& matrix1, const Matrix2d& matrix2)
+{
+    //check for erranious input and throw error
+    if (matrix1.cols != matrix2.rows)
+    {
+        //throw an error
+        throw Errors::DIMENSIONAL_ERROR;
+    }
+
+    //now implement matrix multiplaication algorithm requires o(n^3) complexity
+    for (std::size_t i = 0; i < matrix1.rows; i++)
+    {
+        for (std::size_t j = 0; j < matrix2.cols; j++)
+        {
+            double value = 0;
+
+            for (std::size_t k = 0; k < matrix1.cols; k++)
+            {
+                value += matrix1.numbersArray[i][k] * matrix2.numbersArray[k][j];
+            }
+
+            destMatrix.numbersArray[i][j] = value;
+        }
+    }
+}
+
+void Matrix2d::subtract(Matrix2d& destMatrix, const Matrix2d& matrix)
+{
+    if (destMatrix.cols != matrix.getCols() || destMatrix.rows != matrix.getRows())
+    {
+        throw Errors::DIM_MUST_BE_EQUAL;
+    }
+
+    for (std::size_t row = 0; row < destMatrix.rows; row++)
+    {
+        for (std::size_t col = 0; col < destMatrix.cols; col++)
+        {
+            destMatrix.numbersArray[row][col] -= matrix.numbersArray[row][col];
+        }
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix)

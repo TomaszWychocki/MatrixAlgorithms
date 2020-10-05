@@ -315,6 +315,17 @@ void TEST_017_subtraction_2()
     assert(isException);
 }
 
+void TEST_018_operations_chain()
+{
+    Matrix2d mat1 = { {2, 3, 4} , {5, 6, 7} };
+    Matrix2d mat2 = { {5, 2, 1} , {5, 8, 10} };
+    Matrix2d mat3 = { {10,11},{20,21},{30,31} };
+    Matrix2d expectedResult1 = { {80, 81} , {-130, -135} };
+
+    Matrix2d result = (mat1 - mat2) * mat3;
+    assert(result == expectedResult1);
+}
+
 int main()
 {
     TEST_001_toVector();
@@ -334,4 +345,5 @@ int main()
     TEST_015_matrix_mult();
     TEST_016_subtraction();
     TEST_017_subtraction_2();
+    TEST_018_operations_chain();
 }
