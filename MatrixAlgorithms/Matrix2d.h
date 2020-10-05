@@ -12,7 +12,8 @@ enum class FillType
 enum class Errors
 {
     MATRIX_MUST_BE_SQUARE,
-    DIM_MUST_BE_EQUAL
+    DIM_MUST_BE_EQUAL,
+    DIMENSIONAL_ERROR
 };
 
 class Matrix2d
@@ -36,6 +37,8 @@ public:
     void operator*=(double number);
     Matrix2d operator-(const Matrix2d& matrix) const;
     void operator-=(const Matrix2d& matrix);
+    Matrix2d operator*(const Matrix2d& mat2);
+    void operator *= (const Matrix2d& mat2);
 
     /*
      * METHODS
@@ -49,8 +52,8 @@ private:
     /*
      * FIELDS
      */
-    const std::size_t rows;
-    const std::size_t cols;
+    std::size_t rows;
+    std::size_t cols;
     std::vector<std::vector<double>> numbersArray;
 
     /*
