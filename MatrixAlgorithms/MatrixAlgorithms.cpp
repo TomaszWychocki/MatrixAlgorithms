@@ -205,6 +205,46 @@ void TEST_012_matrix_mult_assign()
     assert(isException);
 }
 
+void TEST_013_matrix_mult()
+{
+	Matrix2d mat1 = { {1,2,3},{4,5,6} };
+	Matrix2d mat2 = { {10,11},{20,21},{30,31} };
+	Matrix2d expectedResult={ {140,146},{320,335} };
+	Matrix2d result= mat1 * mat2;
+	assert(result == expectedResult);
+}
+
+void TEST_014_matrix_mult_assign()
+{
+	Matrix2d mat1 = { {1,8,7,3},{5,4,3,1} };
+	Matrix2d mat2 = { {8},{7},{4},{2} };
+	Matrix2d expectedResult={ {98},{82} };
+	mat1 *= mat2;
+	assert(mat1 == expectedResult);
+}
+
+void TEST_015_matrix_mult()
+{
+	Matrix2d mat1 = { {1, 1, 1, 1}, {2, 2, 2, 2}, {3, 3, 3, 3}, {4, 4, 4, 4} };
+	Matrix2d mat2 = { {8},{7},{4},{2} };
+	Matrix2d expectedResult={ {98},{82} };
+	mat1 *= mat2;
+    bool isException = false;
+    try
+    {
+        Matrix2d result= mat1 * mat2;
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIMENSIONAL_ERROR)
+        {
+            isException = true;
+        }
+        
+    }
+    assert(isException);
+}
+
 int main()
 {
     TEST_001_toVector();
@@ -219,4 +259,7 @@ int main()
     TEST_010_matrix_mult_assign();
     TEST_011_matrix_mult();
     TEST_012_matrix_mult_assign();
+    TEST_013_matrix_mult();
+    TEST_014_matrix_mult_assign();
+    TEST_015_matrix_mult();
 }
