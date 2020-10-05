@@ -143,6 +143,68 @@ void TEST_008_matrix_identity()
     assert(isException);
 }
 
+void TEST_009_matrix_mult()
+{
+	Matrix2d mat1(3,2,FillType::ONES);
+	Matrix2d mat2(2,3,FillType::ONES);
+	Matrix2d expectedResult={ {2,2,2},{2,2,2},{2,2,2} };
+	Matrix2d result= mat1 * mat2;
+	assert(result == expectedResult);
+}
+
+void TEST_010_matrix_mult_assign()
+{
+	Matrix2d mat1(3,2,FillType::ONES);
+	Matrix2d mat2(2,3,FillType::ONES);
+	Matrix2d expectedResult={ {2,2,2},{2,2,2},{2,2,2} };
+	mat1 *= mat2;
+	assert(mat1 == expectedResult);
+}
+
+void TEST_011_matrix_mult()
+{
+	Matrix2d mat1(3,3,FillType::ONES);
+	Matrix2d mat2(2,3,FillType::ONES);
+	Matrix2d expectedResult={ {2,2,2},{2,2,2},{2,2,2} };
+
+    bool isException = false;
+    try
+    {
+        Matrix2d result= mat1 * mat2;
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIMENSIONAL_ERROR)
+        {
+            isException = true;
+        }
+        
+    }
+    assert(isException);
+}
+
+void TEST_012_matrix_mult_assign()
+{
+	Matrix2d mat1(3,3,FillType::ONES);
+	Matrix2d mat2(2,3,FillType::ONES);
+	Matrix2d expectedResult={ {2,2,2},{2,2,2},{2,2,2} };
+
+    bool isException = false;
+    try
+    {
+        mat1 *= mat2;
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIMENSIONAL_ERROR)
+        {
+            isException = true;
+        }
+        
+    }
+    assert(isException);
+}
+
 int main()
 {
     TEST_001_toVector();
@@ -153,4 +215,8 @@ int main()
     TEST_006_matrix_ones();
     TEST_007_matrix_zeros();
     TEST_008_matrix_identity();
+    TEST_009_matrix_mult();
+    TEST_010_matrix_mult_assign();
+    TEST_011_matrix_mult();
+    TEST_012_matrix_mult_assign();
 }

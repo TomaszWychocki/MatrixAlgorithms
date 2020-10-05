@@ -11,7 +11,7 @@
 - [ ] Addition
 - [ ] Subtraction
 - [x] Scalar multiplication
-- [ ] Matrix multiplication
+- [x] Matrix multiplication
 - [x] Generating identity matrix
 - [x] Generating matrix of zeros
 - [x] Generating matrix of ones
