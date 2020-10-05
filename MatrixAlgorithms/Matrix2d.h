@@ -25,7 +25,6 @@ public:
     Matrix2d(std::initializer_list<std::initializer_list<double>> lst);
     Matrix2d(const Matrix2d& matrix);
     Matrix2d(std::size_t row, std::size_t col, FillType fillType);
-    Matrix2d(std::size_t row, std::size_t col);
 
     /*
      * OPERATOR
