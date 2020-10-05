@@ -135,6 +135,42 @@ void Matrix2d::operator*=(double number)
     }
 }
 
+Matrix2d Matrix2d::operator-(const Matrix2d& matrix) const
+{
+    if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
+    {
+        throw Errors::DIM_MUST_BE_EQUAL;
+    }
+
+    Matrix2d mat(*this);
+
+    for (std::size_t row = 0; row < mat.rows; row++)
+    {
+        for (std::size_t col = 0; col < mat.cols; col++)
+        {
+            mat.numbersArray[row][col] -= matrix.numbersArray[row][col];
+        }
+    }
+
+    return mat;
+}
+
+void Matrix2d::operator-=(const Matrix2d& matrix)
+{
+    if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
+    {
+        throw Errors::DIM_MUST_BE_EQUAL;
+    }
+
+    for (std::size_t row = 0; row < this->rows; row++)
+    {
+        for (std::size_t col = 0; col < this->cols; col++)
+        {
+            this->numbersArray[row][col] -= matrix.numbersArray[row][col];
+        }
+    }
+}
+
 double Matrix2d::getValue(std::size_t row, std::size_t col) const
 {
     return this->numbersArray[row][col];
