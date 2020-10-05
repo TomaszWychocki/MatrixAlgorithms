@@ -2,35 +2,31 @@
 #include <vector>
 
 Matrix2d::Matrix2d()
-    : rows(0)
-    , cols(0)
+    : rows(0), cols(0)
 {
 }
 
 Matrix2d::Matrix2d(std::initializer_list<std::initializer_list<double>> lst)
-    : rows(lst.size())
-    , cols(static_cast<std::initializer_list<double>>(*lst.begin()).size())
+    : rows(lst.size()), cols(static_cast<std::initializer_list<double>>(*lst.begin()).size())
 {
-    for (const auto& l : lst)
+    for (const auto &l : lst)
     {
-        std::vector<double> vec{ l };
+        std::vector<double> vec{l};
         this->numbersArray.push_back(vec);
     }
 }
 
-Matrix2d::Matrix2d(const Matrix2d& matrix)
-    : rows(matrix.numbersArray.size())
-    , cols(matrix.numbersArray[0].size())
+Matrix2d::Matrix2d(const Matrix2d &matrix)
+    : rows(matrix.numbersArray.size()), cols(matrix.numbersArray[0].size())
 {
-    for (const auto& row : matrix.numbersArray)
+    for (const auto &row : matrix.numbersArray)
     {
         this->numbersArray.push_back(row);
     }
 }
 
 Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
-    : rows(rows)
-    , cols(cols)
+    : rows(rows), cols(cols)
 {
     if (fillType == FillType::IDENTITY && cols != rows)
     {
@@ -73,7 +69,7 @@ Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
     }
 }
 
-bool Matrix2d::operator==(const Matrix2d& matrix) const
+bool Matrix2d::operator==(const Matrix2d &matrix) const
 {
     if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
     {
@@ -91,7 +87,7 @@ bool Matrix2d::operator==(const Matrix2d& matrix) const
     return true;
 }
 
-bool Matrix2d::operator!=(const Matrix2d& matrix) const
+bool Matrix2d::operator!=(const Matrix2d &matrix) const
 {
     if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
     {
@@ -135,7 +131,7 @@ void Matrix2d::operator*=(double number)
     }
 }
 
-Matrix2d Matrix2d::operator-(const Matrix2d& matrix) const
+Matrix2d Matrix2d::operator-(const Matrix2d &matrix) const
 {
     if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
     {
@@ -155,7 +151,7 @@ Matrix2d Matrix2d::operator-(const Matrix2d& matrix) const
     return mat;
 }
 
-void Matrix2d::operator-=(const Matrix2d& matrix)
+void Matrix2d::operator-=(const Matrix2d &matrix)
 {
     if (this->cols != matrix.getCols() || this->rows != matrix.getRows())
     {
@@ -190,19 +186,18 @@ std::vector<double> Matrix2d::toVector() const
 {
     std::vector<double> vec;
 
-    for (const auto& row : this->numbersArray)
+    for (const auto &row : this->numbersArray)
     {
         vec.insert(vec.end(), row.begin(), row.end());
     }
-
     return vec;
 }
 
-std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix)
+std::ostream &operator<<(std::ostream &os, const Matrix2d &matrix)
 {
-    for (const auto& row : matrix.numbersArray)
+    for (const auto &row : matrix.numbersArray)
     {
-        for (const auto& elem : row)
+        for (const auto &elem : row)
         {
             os << elem << " ";
         }
@@ -210,4 +205,22 @@ std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix)
     }
 
     return os;
+}
+std::vector<std::vector<double>> Matrix2d::transpose()
+{
+    size_t cols = getCols();
+    size_t rows = getRows();
+    std::vector<double> vd = toVector();
+    std::vector<std::vector<double>> mat_t;
+    for (int i = 0; i < cols; i++)
+    {
+        std::vector<double> row_t;
+        for (int j = 0; j < rows; j++)
+        {
+            double cell = getValue(j, i);
+            row_t.push_back(cell);
+        }
+        mat_t.push_back(row_t);
+    }
+    return mat_t;
 }

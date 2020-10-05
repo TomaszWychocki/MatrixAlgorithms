@@ -23,19 +23,19 @@ public:
      */
     Matrix2d();
     Matrix2d(std::initializer_list<std::initializer_list<double>> lst);
-    Matrix2d(const Matrix2d& matrix);
+    Matrix2d(const Matrix2d &matrix);
     Matrix2d(std::size_t row, std::size_t col, FillType fillType);
 
     /*
      * OPERATOR
      */
-    friend std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix);
-    bool operator==(const Matrix2d& matrix) const;
-    bool operator!=(const Matrix2d& matrix) const;
+    friend std::ostream &operator<<(std::ostream &os, const Matrix2d &matrix);
+    bool operator==(const Matrix2d &matrix) const;
+    bool operator!=(const Matrix2d &matrix) const;
     Matrix2d operator*(double number) const;
     void operator*=(double number);
-    Matrix2d operator-(const Matrix2d& matrix) const;
-    void operator-=(const Matrix2d& matrix);
+    Matrix2d operator-(const Matrix2d &matrix) const;
+    void operator-=(const Matrix2d &matrix);
 
     /*
      * METHODS
@@ -44,6 +44,7 @@ public:
     std::size_t getRows() const;
     std::size_t getCols() const;
     std::vector<double> toVector() const;
+    std::vector<std::vector<double>> transpose();
 
 private:
     /*
