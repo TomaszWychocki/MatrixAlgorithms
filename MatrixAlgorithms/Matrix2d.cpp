@@ -171,6 +171,72 @@ void Matrix2d::operator-=(const Matrix2d& matrix)
     }
 }
 
+//operator overloading for matrix multiplication (*)
+Matrix2d  Matrix2d::operator * (const Matrix2d& mat2)
+{
+    //check for erranious input and throw error
+    if (this->cols != mat2.rows)
+    {
+        //throw an error
+        throw Errors::DIMENSIONAL_ERROR;
+    }
+
+    Matrix2d result(this->rows, mat2.cols, FillType::ZEROS);
+
+    //now implement matrix multiplaication algorithm requires o(n^3) complexity
+    for (std::size_t i = 0; i < this->rows; i++)
+    {
+        for (std::size_t j = 0; j < mat2.cols; j++)
+        {
+            double value = 0;
+            for (std::size_t k = 0; k < this->cols; k++)
+            {
+                value += this->numbersArray[i][k] * mat2.numbersArray[k][j];
+            }
+            result.numbersArray[i][j] = value;
+        }
+    }
+
+    return result;
+}
+
+//operator overloading for matrix multiplication (*=)
+void  Matrix2d::operator *= (const Matrix2d& mat2)
+{
+    //check for erranious input and throw error
+    if (this->cols != mat2.rows)
+    {
+        //throw an error
+        throw Errors::DIMENSIONAL_ERROR;
+    }
+
+    Matrix2d result(this->rows, mat2.cols, FillType::ZEROS);
+
+    //now implement matrix multiplaication algorithm requires o(n^3) complexity
+    for (std::size_t i = 0; i < this->rows; i++)
+    {
+        for (std::size_t j = 0; j < mat2.cols; j++)
+        {
+            double value = 0;
+            for (std::size_t k = 0; k < this->cols; k++)
+            {
+                value += this->numbersArray[i][k] * mat2.numbersArray[k][j];
+            }
+            result.numbersArray[i][j] = value;
+        }
+    }
+
+    //modifying the first operand
+    for (std::size_t i = 0; i < this->rows; i++)
+        this->numbersArray[i].clear();
+
+    this->numbersArray.clear();
+
+    this->rows = result.rows;
+    this->cols = result.cols;
+    this->numbersArray = result.numbersArray;
+}
+
 double Matrix2d::getValue(std::size_t row, std::size_t col) const
 {
     return this->numbersArray[row][col];
