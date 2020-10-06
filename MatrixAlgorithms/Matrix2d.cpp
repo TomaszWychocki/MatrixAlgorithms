@@ -28,9 +28,9 @@ Matrix2d::Matrix2d(const Matrix2d& matrix)
     }
 }
 
-Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
-    : rows(rows)
-    , cols(cols)
+Matrix2d::Matrix2d(std::size_t _rows, std::size_t _cols, FillType fillType)
+    : rows(_rows)
+    , cols(_cols)
 {
     if (fillType == FillType::IDENTITY && cols != rows)
     {
@@ -40,12 +40,12 @@ Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
     switch (fillType)
     {
     case FillType::IDENTITY:
-        for (std::size_t row = 0; row < rows; row++)
+        for (std::size_t row = 0; row < _rows; row++)
         {
             std::vector<double> vec(cols, 0.0);
             this->numbersArray.push_back(vec);
 
-            for (std::size_t col = 0; col < cols; col++)
+            for (std::size_t col = 0; col < _cols; col++)
             {
                 if (row == col)
                 {
@@ -56,7 +56,7 @@ Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
         break;
 
     case FillType::ZEROS:
-        for (std::size_t row = 0; row < rows; row++)
+        for (std::size_t row = 0; row < _rows; row++)
         {
             std::vector<double> vec(cols, 0.0);
             this->numbersArray.push_back(vec);
@@ -64,7 +64,7 @@ Matrix2d::Matrix2d(std::size_t rows, std::size_t cols, FillType fillType)
         break;
 
     case FillType::ONES:
-        for (std::size_t row = 0; row < rows; row++)
+        for (std::size_t row = 0; row < _rows; row++)
         {
             std::vector<double> vec(cols, 1.0);
             this->numbersArray.push_back(vec);
@@ -254,11 +254,11 @@ Matrix2d& Matrix2d::transpose()
     Matrix2d matCopy = { *this };
     this->numbersArray.clear();
 
-    for (int i = 0; i < this->cols; i++)
+    for (std::size_t i = 0; i < this->cols; i++)
     {
         std::vector<double> row_t;
 
-        for (int j = 0; j < this->rows; j++)
+        for (std::size_t j = 0; j < this->rows; j++)
         {
             row_t.push_back(matCopy.getValue(j, i));
         }
@@ -272,8 +272,8 @@ Matrix2d& Matrix2d::transpose()
     return *this;
 }
 
-Matrix2d& Matrix2d::concat(const Matrix2d& matrix, ConcatSide side)
-{
-    // TODO
-    return *this;
-}
+//Matrix2d& Matrix2d::concat(const Matrix2d& matrix, ConcatSide side)
+//{
+//    // TODO
+//    return *this;
+//}

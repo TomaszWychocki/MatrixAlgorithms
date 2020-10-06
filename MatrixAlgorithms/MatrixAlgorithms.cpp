@@ -2,6 +2,51 @@
 #include "Matrix2d.h"
 #include <assert.h>
 
+void TEST_001_toVector();
+void TEST_002_getCols();
+void TEST_003_getRows();
+void TEST_004_equality();
+void TEST_005_scalarMultiplication();
+void TEST_006_matrix_ones();
+void TEST_007_matrix_zeros();
+void TEST_008_matrix_identity();
+void TEST_009_matrix_mult();
+void TEST_010_matrix_mult_assign();
+void TEST_011_matrix_mult();
+void TEST_012_matrix_mult_assign();
+void TEST_013_matrix_mult();
+void TEST_014_matrix_mult_assign();
+void TEST_015_matrix_mult();
+void TEST_016_subtraction();
+void TEST_017_subtraction_2();
+void TEST_018_operations_chain();
+void TEST_019_transpose();
+void TEST_020_matrix_concat();
+
+int main()
+{
+    TEST_001_toVector();
+    TEST_002_getCols();
+    TEST_003_getRows();
+    TEST_004_equality();
+    TEST_005_scalarMultiplication();
+    TEST_006_matrix_ones();
+    TEST_007_matrix_zeros();
+    TEST_008_matrix_identity();
+    TEST_009_matrix_mult();
+    TEST_010_matrix_mult_assign();
+    TEST_011_matrix_mult();
+    TEST_012_matrix_mult_assign();
+    TEST_013_matrix_mult();
+    TEST_014_matrix_mult_assign();
+    TEST_015_matrix_mult();
+    TEST_016_subtraction();
+    TEST_017_subtraction_2();
+    TEST_018_operations_chain();
+    TEST_019_transpose();
+    //TEST_020_matrix_concat();
+}
+
 void TEST_001_toVector()
 {
     Matrix2d mat = { {2, 3, 4} , {5, 6, 7} };
@@ -336,7 +381,7 @@ void TEST_019_transpose()
     assert(mat2.transpose() == expected2);
 }
 
-void TEST_020_matrix_concat()
+/*void TEST_020_matrix_concat()
 {
     Matrix2d mat1 = { {2, 3} , {5, 6} };
     Matrix2d mat2 = { {6, 7} , {4, 1} , {7, 9} };
@@ -391,28 +436,4 @@ void TEST_020_matrix_concat()
         }
     }
     assert(isException);
-}
-
-int main()
-{
-    TEST_001_toVector();
-    TEST_002_getCols();
-    TEST_003_getRows();
-    TEST_004_equality();
-    TEST_005_scalarMultiplication();
-    TEST_006_matrix_ones();
-    TEST_007_matrix_zeros();
-    TEST_008_matrix_identity();
-    TEST_009_matrix_mult();
-    TEST_010_matrix_mult_assign();
-    TEST_011_matrix_mult();
-    TEST_012_matrix_mult_assign();
-    TEST_013_matrix_mult();
-    TEST_014_matrix_mult_assign();
-    TEST_015_matrix_mult();
-    TEST_016_subtraction();
-    TEST_017_subtraction_2();
-    TEST_018_operations_chain();
-    TEST_019_transpose();
-    //TEST_020_matrix_concat();
-}
+}*/
