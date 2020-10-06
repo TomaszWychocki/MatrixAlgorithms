@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Matrix2d.h"
+#include "Matrix2d.cpp"
 #include <assert.h>
 
 void TEST_001_toVector()
@@ -212,10 +212,15 @@ void TEST_010_subtraction_2()
     }
     assert(isException);
 }
-std::vector<std::vector<double>> TEST_011_transpose()
+void TEST_011_transpose()
 {
     Matrix2d mat1 = {{2, 3, 4, 8}, {5, 6, 7, 9}};
-    return mat1.transpose();
+    mat1.transpose();
+    std::vector<double> expected = {2, 5, 3, 6, 4, 7, 8, 9};
+    assert(mat1.toVector() == expected);
+    Matrix2d mat2 = {{7}, {9}, {2}};
+    std::vector<double> expectedResult2 = {7, 9, 2};
+    assert(mat2.toVector() == expectedResult2);
 }
 
 int main()

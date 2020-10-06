@@ -206,7 +206,7 @@ std::ostream &operator<<(std::ostream &os, const Matrix2d &matrix)
 
     return os;
 }
-std::vector<std::vector<double>> Matrix2d::transpose()
+void Matrix2d::transpose()
 {
     size_t cols = getCols();
     size_t rows = getRows();
@@ -222,5 +222,5 @@ std::vector<std::vector<double>> Matrix2d::transpose()
         }
         mat_t.push_back(row_t);
     }
-    return mat_t;
+    this->numbersArray = mat_t;
 }

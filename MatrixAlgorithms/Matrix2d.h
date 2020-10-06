@@ -44,7 +44,7 @@ public:
     std::size_t getRows() const;
     std::size_t getCols() const;
     std::vector<double> toVector() const;
-    std::vector<std::vector<double>> transpose();
+    void transpose();
 
 private:
     /*
