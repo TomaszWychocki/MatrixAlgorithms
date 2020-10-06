@@ -319,7 +319,7 @@ void TEST_018_operations_chain()
 {
     Matrix2d mat1 = { {2, 3, 4} , {5, 6, 7} };
     Matrix2d mat2 = { {5, 2, 1} , {5, 8, 10} };
-    Matrix2d mat3 = { {10,11},{20,21},{30,31} };
+    Matrix2d mat3 = { {10, 11} , {20, 21} , {30, 31} };
     Matrix2d expectedResult1 = { {80, 81} , {-130, -135} };
 
     Matrix2d result = (mat1 - mat2) * mat3;
@@ -328,12 +328,12 @@ void TEST_018_operations_chain()
 void TEST_019_transpose()
 {
     Matrix2d mat1 = {{2, 3, 4, 8}, {5, 6, 7, 9}};
-    mat1.transpose();
-    std::vector<double> expected = {2, 5, 3, 6, 4, 7, 8, 9};
-    assert(mat1.toVector() == expected);
+    Matrix2d expected1 = { {2, 5} , {3, 6} , {4, 7} , {8, 9} };
+    assert(mat1.transpose() == expected1);
+
     Matrix2d mat2 = {{7}, {9}, {2}};
-    std::vector<double> expectedResult2 = {7, 9, 2};
-    assert(mat2.toVector() == expectedResult2);
+    Matrix2d expected2 = { {7, 9, 2} };
+    assert(mat2.transpose() == expected2);
 }
 
 int main()

@@ -16,6 +16,6 @@
 - [x] Generating matrix of zeros
 - [x] Generating matrix of ones
 - [ ] Matrix inverstion
-- [ ] Transpose of a matrix
+- [x] Transpose of a matrix
 - [ ] Determinant of a matrix
 - [ ] Concatenating of matrices

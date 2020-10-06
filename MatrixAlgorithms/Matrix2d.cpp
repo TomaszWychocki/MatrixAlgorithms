@@ -175,6 +175,7 @@ bool Matrix2d::areEqual(const Matrix2d& matrix1, const Matrix2d& matrix2)
     {
         if (matrix1.numbersArray[row] != matrix2.numbersArray[row])
         {
+            std::cout << "F" << std::endl;
             return false;
         }
     }
@@ -248,21 +249,25 @@ std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix)
 
     return os;
 }
-void Matrix2d::transpose()
+Matrix2d& Matrix2d::transpose()
 {
-    size_t cols = getCols();
-    size_t rows = getRows();
-    std::vector<double> vd = toVector();
-    std::vector<std::vector<double>> mat_t;
-    for (int i = 0; i < cols; i++)
+    Matrix2d matCopy = { *this };
+    this->numbersArray.clear();
+
+    for (int i = 0; i < this->cols; i++)
     {
         std::vector<double> row_t;
-        for (int j = 0; j < rows; j++)
+
+        for (int j = 0; j < this->rows; j++)
         {
-            double cell = getValue(j, i);
-            row_t.push_back(cell);
+            row_t.push_back(matCopy.getValue(j, i));
         }
-        mat_t.push_back(row_t);
+
+        this->numbersArray.push_back(row_t);
     }
-    this->numbersArray = mat_t;
+
+    this->rows = this->numbersArray.size();
+    this->cols = this->numbersArray[0].size();
+
+    return *this;
 }
