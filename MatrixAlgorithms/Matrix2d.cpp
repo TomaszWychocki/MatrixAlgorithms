@@ -271,3 +271,9 @@ Matrix2d& Matrix2d::transpose()
 
     return *this;
 }
+
+Matrix2d& Matrix2d::concat(const Matrix2d& matrix, ConcatSide side)
+{
+    // TODO
+    return *this;
+}

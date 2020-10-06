@@ -16,6 +16,14 @@ enum class Errors
     DIMENSIONAL_ERROR
 };
 
+enum class ConcatSide
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
 class Matrix2d
 {
 public:
@@ -48,6 +56,7 @@ public:
     std::size_t getCols() const;
     std::vector<double> toVector() const;
     Matrix2d& transpose();
+    Matrix2d& concat(const Matrix2d& matrix, ConcatSide side);
 
 private:
     /*

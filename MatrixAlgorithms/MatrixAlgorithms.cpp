@@ -327,13 +327,70 @@ void TEST_018_operations_chain()
 }
 void TEST_019_transpose()
 {
-    Matrix2d mat1 = {{2, 3, 4, 8}, {5, 6, 7, 9}};
+    Matrix2d mat1 = {{2, 3, 4, 8} , {5, 6, 7, 9}};
     Matrix2d expected1 = { {2, 5} , {3, 6} , {4, 7} , {8, 9} };
     assert(mat1.transpose() == expected1);
 
-    Matrix2d mat2 = {{7}, {9}, {2}};
+    Matrix2d mat2 = {{7} , {9} , {2}};
     Matrix2d expected2 = { {7, 9, 2} };
     assert(mat2.transpose() == expected2);
+}
+
+void TEST_020_matrix_concat()
+{
+    Matrix2d mat1 = { {2, 3} , {5, 6} };
+    Matrix2d mat2 = { {6, 7} , {4, 1} , {7, 9} };
+    Matrix2d mat3 = { {5, 1, 4} , {6, 8, 1} };
+
+    Matrix2d result1 = { mat1 };
+    result1.concat(mat2, ConcatSide::UP);
+    Matrix2d expected1 = { {6, 7} , {4, 1} , {7, 9} , {2, 3} , {5, 6} };
+    assert(result1 == expected1);
+
+    Matrix2d result2 = { mat1 };
+    result1.concat(mat2, ConcatSide::DOWN);
+    Matrix2d expected2 = { {2, 3} , {5, 6} , {6, 7} , {4, 1} , {7, 9} };
+    assert(result2 == expected2);
+
+    Matrix2d result3 = { mat1 };
+    result1.concat(mat3, ConcatSide::LEFT);
+    Matrix2d expected3 = { {5, 1, 4, 2, 3} , {6, 8, 1, 5, 6} };
+    assert(result3 == expected3);
+
+    Matrix2d result4 = { mat1 };
+    result1.concat(mat3, ConcatSide::RIGHT);
+    Matrix2d expected4 = { {2, 3, 5, 1, 4} , {5, 6, 6, 8, 1} };
+    assert(result4 == expected4);
+
+    bool isException = false;
+    try
+    {
+        Matrix2d result5 = { mat1 };
+        result5.concat(mat3, ConcatSide::DOWN);
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIMENSIONAL_ERROR)
+        {
+            isException = true;
+        }
+    }
+    assert(isException);
+
+    isException = false;
+    try
+    {
+        Matrix2d result5 = { mat1 };
+        result5.concat(mat2, ConcatSide::LEFT);
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::DIMENSIONAL_ERROR)
+        {
+            isException = true;
+        }
+    }
+    assert(isException);
 }
 
 int main()
@@ -357,4 +414,5 @@ int main()
     TEST_017_subtraction_2();
     TEST_018_operations_chain();
     TEST_019_transpose();
+    //TEST_020_matrix_concat();
 }
