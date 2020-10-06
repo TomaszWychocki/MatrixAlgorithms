@@ -248,3 +248,21 @@ std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix)
 
     return os;
 }
+void Matrix2d::transpose()
+{
+    size_t cols = getCols();
+    size_t rows = getRows();
+    std::vector<double> vd = toVector();
+    std::vector<std::vector<double>> mat_t;
+    for (int i = 0; i < cols; i++)
+    {
+        std::vector<double> row_t;
+        for (int j = 0; j < rows; j++)
+        {
+            double cell = getValue(j, i);
+            row_t.push_back(cell);
+        }
+        mat_t.push_back(row_t);
+    }
+    this->numbersArray = mat_t;
+}
