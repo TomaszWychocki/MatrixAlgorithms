@@ -236,6 +236,44 @@ void Matrix2d::subtract(Matrix2d& destMatrix, const Matrix2d& matrix)
     }
 }
 
+double Matrix2d::calcDet(const Matrix2d& matrix) const
+{
+    double det = 0;
+
+    if (matrix.rows == 2 && matrix.cols == 2)
+    {
+        det = (matrix.getValue(0, 0) * matrix.getValue(1, 1)) - (matrix.getValue(0, 1) * matrix.getValue(1, 0));
+        return det;
+    }
+
+    for (std::size_t colToRemove = 0; colToRemove < matrix.cols; colToRemove++)
+    {
+        Matrix2d tempMat;
+        tempMat.rows = matrix.rows - 1;
+        tempMat.cols = matrix.cols - 1;
+
+        for (std::size_t row = 1; row < matrix.rows; row++)
+        {
+            std::vector<double> rowVec;
+
+            for (std::size_t col = 0; col < matrix.cols; col++)
+            {
+                if (col != colToRemove)
+                {
+                    rowVec.push_back(matrix.getValue(row, col));
+                }
+            }
+
+            tempMat.numbersArray.push_back(rowVec);
+        }
+
+        double sign = (colToRemove % 2 == 0) ? 1 : -1;
+        det += matrix.getValue(0, colToRemove) * sign * this->calcDet(tempMat);
+    }
+
+    return det;
+}
+
 std::ostream& operator<<(std::ostream& os, const Matrix2d& matrix)
 {
     for (const auto& row : matrix.numbersArray)
@@ -277,3 +315,13 @@ Matrix2d& Matrix2d::transpose()
 //    // TODO
 //    return *this;
 //}
+
+double Matrix2d::getDeterminant() const
+{
+    if (this->cols != this->rows)
+    {
+        throw Errors::MATRIX_MUST_BE_SQUARE;
+    }
+
+    return this->calcDet(*this);
+}

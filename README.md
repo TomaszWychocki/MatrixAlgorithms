@@ -17,5 +17,5 @@
 - [x] Generating matrix of ones
 - [ ] Matrix inverstion
 - [x] Transpose of a matrix
-- [ ] Determinant of a matrix
+- [x] Determinant of a matrix
 - [ ] Concatenating of matrices

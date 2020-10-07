@@ -57,6 +57,7 @@ public:
     std::vector<double> toVector() const;
     Matrix2d& transpose();
     //Matrix2d& concat(const Matrix2d& matrix, ConcatSide side);
+    double getDeterminant() const;
 
 private:
     /*
@@ -73,4 +74,5 @@ private:
     static void multiply(Matrix2d& destMatrix, double number);
     static void multiply(Matrix2d& destMatrix, const Matrix2d& matrix1, const Matrix2d& matrix2);
     static void subtract(Matrix2d& destMatrix, const Matrix2d& matrix);
+    double calcDet(const Matrix2d& matrix) const;
 };

@@ -22,6 +22,7 @@ void TEST_017_subtraction_2();
 void TEST_018_operations_chain();
 void TEST_019_transpose();
 void TEST_020_matrix_concat();
+void TEST_021_determinant();
 
 int main()
 {
@@ -45,6 +46,7 @@ int main()
     TEST_018_operations_chain();
     TEST_019_transpose();
     //TEST_020_matrix_concat();
+    TEST_021_determinant();
 }
 
 void TEST_001_toVector()
@@ -370,6 +372,7 @@ void TEST_018_operations_chain()
     Matrix2d result = (mat1 - mat2) * mat3;
     assert(result == expectedResult1);
 }
+
 void TEST_019_transpose()
 {
     Matrix2d mat1 = {{2, 3, 4, 8} , {5, 6, 7, 9}};
@@ -437,3 +440,27 @@ void TEST_019_transpose()
     }
     assert(isException);
 }*/
+
+void TEST_021_determinant()
+{
+    Matrix2d mat = { {2, 3, 4, 5} , {5, 6, 7, 2} , {6, 1, 7, 3} , {6, 3, 8, 1} };
+    assert(mat.getDeterminant() == 132);
+
+    Matrix2d mat2 = { { 1,  3,  0, -1} ,  { 0,  2,  1,  3} ,  { 3,  1,  2,  1} ,  {-1,  2,  0,  3} };
+    assert(mat2.getDeterminant() == 14);
+
+    bool isException = false;
+    try
+    {
+        Matrix2d mat3(4, 3, FillType::ONES);
+        mat3.getDeterminant();
+    }
+    catch (Errors err)
+    {
+        if (err == Errors::MATRIX_MUST_BE_SQUARE)
+        {
+            isException = true;
+        }
+    }
+    assert(isException);
+}
