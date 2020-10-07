@@ -23,6 +23,7 @@ void TEST_018_operations_chain();
 void TEST_019_transpose();
 void TEST_020_matrix_concat();
 void TEST_021_determinant();
+void TEST_022_getValue();
 
 int main()
 {
@@ -47,6 +48,7 @@ int main()
     TEST_019_transpose();
     //TEST_020_matrix_concat();
     TEST_021_determinant();
+    TEST_022_getValue();
 }
 
 void TEST_001_toVector()
@@ -463,4 +465,31 @@ void TEST_021_determinant()
         }
     }
     assert(isException);
+}
+
+void TEST_022_getValue()
+{
+  std::size_t R = 2, C = 3;
+  Matrix2d mat = { {2, 3, 4} , {5, 6, 7} };
+  std::vector<double> expectedResult = { 2, 3, 4, 5, 6, 7 };
+  
+  for(std::size_t i =  0; i < R; ++i)
+    for(std::size_t j = 0; j < C; ++j)
+        assert(mat.getValue(i, j) == expectedResult[i * C + j]);
+
+  R = 1, C = 3;
+  Matrix2d mat2 = { {5, 6, 7} };
+  std::vector<double> expectedResult2 = { 5, 6, 7 };
+  
+  for(std::size_t i =  0; i < R; ++i)
+    for(std::size_t j = 0; j < C; ++j)
+        assert(mat2.getValue(i, j) == expectedResult2[i * C + j]);
+
+  R = 3, C = 1;
+  Matrix2d mat3 = { {7}, {9}, {2} };
+  std::vector<double> expectedResult3 = { 7, 9, 2 };
+  
+  for(std::size_t i =  0; i < R; ++i)
+    for(std::size_t j = 0; j < C; ++j)
+        assert(mat3.getValue(i, j) == expectedResult3[i * C + j]);
 }
