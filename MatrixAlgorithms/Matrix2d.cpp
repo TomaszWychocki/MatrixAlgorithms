@@ -310,11 +310,60 @@ Matrix2d& Matrix2d::transpose()
     return *this;
 }
 
-//Matrix2d& Matrix2d::concat(const Matrix2d& matrix, ConcatSide side)
-//{
-//    // TODO
-//    return *this;
-//}
+Matrix2d& Matrix2d::concat(const Matrix2d& matrix, ConcatSide side)
+{
+    //if the concat side is up or down
+    if ((short)side < 2)
+    {
+        if (side == ConcatSide::UP)
+        {
+            Matrix2d copy = { matrix };
+            *this = copy.concat(*this, ConcatSide::DOWN);
+            return *this;
+        }
+
+        //compare the cols
+        if (cols != matrix.cols)
+        {
+            throw Errors::DIMENSIONAL_ERROR;
+        }
+
+        for (std::size_t i = 0; i < matrix.rows; i++)
+        {
+            numbersArray.push_back(matrix.numbersArray[i]);
+        }
+
+        rows += matrix.rows;
+    }
+    //if the concat side is left or right
+    else
+    {
+        if (side == ConcatSide::LEFT)
+        {
+            Matrix2d copy = { matrix };
+            *this = copy.concat(*this, ConcatSide::RIGHT);
+            return *this;
+        }
+
+        //compare the rows
+        if (rows != matrix.rows)
+        {
+            throw Errors::DIMENSIONAL_ERROR;
+        }
+
+        for (std::size_t i = 0; i < rows; i++)
+        {
+            for (std::size_t j = 0; j < matrix.cols; j++)
+            {
+                numbersArray[i].push_back(matrix.numbersArray[i][j]);
+            }
+        }
+
+        cols += matrix.cols;
+    }
+    
+    return *this;
+}
 
 double Matrix2d::getDeterminant() const
 {

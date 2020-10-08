@@ -56,7 +56,7 @@ public:
     std::size_t getCols() const;
     std::vector<double> toVector() const;
     Matrix2d& transpose();
-    //Matrix2d& concat(const Matrix2d& matrix, ConcatSide side);
+    Matrix2d& concat(const Matrix2d& matrix, ConcatSide side);
     double getDeterminant() const;
 
 private:
