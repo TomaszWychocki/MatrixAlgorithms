@@ -18,4 +18,4 @@
 - [ ] Matrix inverstion
 - [x] Transpose of a matrix
 - [x] Determinant of a matrix
-- [ ] Concatenating of matrices
+- [x] Concatenating of matrices

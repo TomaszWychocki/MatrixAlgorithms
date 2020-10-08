@@ -46,7 +46,7 @@ int main()
     TEST_017_subtraction_2();
     TEST_018_operations_chain();
     TEST_019_transpose();
-    //TEST_020_matrix_concat();
+    TEST_020_matrix_concat();
     TEST_021_determinant();
     TEST_022_getValue();
 }
@@ -386,7 +386,7 @@ void TEST_019_transpose()
     assert(mat2.transpose() == expected2);
 }
 
-/*void TEST_020_matrix_concat()
+void TEST_020_matrix_concat()
 {
     Matrix2d mat1 = { {2, 3} , {5, 6} };
     Matrix2d mat2 = { {6, 7} , {4, 1} , {7, 9} };
@@ -398,17 +398,17 @@ void TEST_019_transpose()
     assert(result1 == expected1);
 
     Matrix2d result2 = { mat1 };
-    result1.concat(mat2, ConcatSide::DOWN);
+    result2.concat(mat2, ConcatSide::DOWN);
     Matrix2d expected2 = { {2, 3} , {5, 6} , {6, 7} , {4, 1} , {7, 9} };
     assert(result2 == expected2);
 
     Matrix2d result3 = { mat1 };
-    result1.concat(mat3, ConcatSide::LEFT);
+    result3.concat(mat3, ConcatSide::LEFT);
     Matrix2d expected3 = { {5, 1, 4, 2, 3} , {6, 8, 1, 5, 6} };
     assert(result3 == expected3);
 
     Matrix2d result4 = { mat1 };
-    result1.concat(mat3, ConcatSide::RIGHT);
+    result4.concat(mat3, ConcatSide::RIGHT);
     Matrix2d expected4 = { {2, 3, 5, 1, 4} , {5, 6, 6, 8, 1} };
     assert(result4 == expected4);
 
@@ -441,7 +441,7 @@ void TEST_019_transpose()
         }
     }
     assert(isException);
-}*/
+}
 
 void TEST_021_determinant()
 {
