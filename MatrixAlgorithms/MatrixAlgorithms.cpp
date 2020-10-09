@@ -446,10 +446,10 @@ void TEST_020_matrix_concat()
 void TEST_021_determinant()
 {
     Matrix2d mat = { {2, 3, 4, 5} , {5, 6, 7, 2} , {6, 1, 7, 3} , {6, 3, 8, 1} };
-    assert(mat.getDeterminant() == 132);
+    assert(static_cast<int>(mat.getDeterminant()) == 132);
 
     Matrix2d mat2 = { { 1,  3,  0, -1} ,  { 0,  2,  1,  3} ,  { 3,  1,  2,  1} ,  {-1,  2,  0,  3} };
-    assert(mat2.getDeterminant() == 14);
+    assert(static_cast<int>(mat2.getDeterminant()) == 14);
 
     bool isException = false;
     try
@@ -469,27 +469,39 @@ void TEST_021_determinant()
 
 void TEST_022_getValue()
 {
-  std::size_t R = 2, C = 3;
-  Matrix2d mat = { {2, 3, 4} , {5, 6, 7} };
-  std::vector<double> expectedResult = { 2, 3, 4, 5, 6, 7 };
-  
-  for(std::size_t i =  0; i < R; ++i)
-    for(std::size_t j = 0; j < C; ++j)
-        assert(mat.getValue(i, j) == expectedResult[i * C + j]);
+    std::size_t R = 2, C = 3;
+    Matrix2d mat = { {2, 3, 4} , {5, 6, 7} };
+    std::vector<int> expectedResult = { 2, 3, 4, 5, 6, 7 };
 
-  R = 1, C = 3;
-  Matrix2d mat2 = { {5, 6, 7} };
-  std::vector<double> expectedResult2 = { 5, 6, 7 };
-  
-  for(std::size_t i =  0; i < R; ++i)
-    for(std::size_t j = 0; j < C; ++j)
-        assert(mat2.getValue(i, j) == expectedResult2[i * C + j]);
+    for(std::size_t i =  0; i < R; ++i)
+    {
+        for(std::size_t j = 0; j < C; ++j)
+        {
+            assert(static_cast<int>(mat.getValue(i, j)) == expectedResult[i * C + j]);
+        }
+    }
 
-  R = 3, C = 1;
-  Matrix2d mat3 = { {7}, {9}, {2} };
-  std::vector<double> expectedResult3 = { 7, 9, 2 };
-  
-  for(std::size_t i =  0; i < R; ++i)
-    for(std::size_t j = 0; j < C; ++j)
-        assert(mat3.getValue(i, j) == expectedResult3[i * C + j]);
+    R = 1, C = 3;
+    Matrix2d mat2 = { {5, 6, 7} };
+    std::vector<int> expectedResult2 = { 5, 6, 7 };
+
+    for(std::size_t i =  0; i < R; ++i)
+    {
+        for(std::size_t j = 0; j < C; ++j)
+        {
+            assert(static_cast<int>(mat2.getValue(i, j)) == expectedResult2[i * C + j]);
+        }
+    }
+
+    R = 3, C = 1;
+    Matrix2d mat3 = { {7}, {9}, {2} };
+    std::vector<int> expectedResult3 = { 7, 9, 2 };
+
+    for(std::size_t i =  0; i < R; ++i)
+    {
+        for(std::size_t j = 0; j < C; ++j)
+        {
+            assert(static_cast<int>(mat3.getValue(i, j)) == expectedResult3[i * C + j]);
+        }
+    }
 }
